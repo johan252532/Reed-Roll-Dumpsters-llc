@@ -92,3 +92,59 @@ function updateTexts() {
     langSwitcher.textContent = currentLang === 'en' ? 'ES' : 'EN';
     document.documentElement.lang = currentLang;
 }
+
+
+const serviceAreaZips = [
+        "77002", "77003", "77004", "77005", "77006", "77007", "77008", "77009", "77010",
+        "77011", "77012", "77013", "77014", "77015", "77016", "77017", "77018", "77019",
+        "77020", "77021", "77022", "77023", "77024", "77025", "77026", "77027", "77028",
+        "77029", "77030", "77031", "77032", "77033", "77034", "77035", "77036", "77037",
+        "77038", "77039", "77040", "77041", "77042", "77043", "77044", "77045", "77046",
+        "77047", "77048", "77049", "77050", "77051", "77053", "77054", "77055", "77056",
+        "77057", "77058", "77059", "77060", "77061", "77062", "77063", "77064", "77065",
+        "77066", "77067", "77068", "77069", "77070", "77071", "77072", "77073", "77074",
+        "77075", "77076", "77077", "77078", "77079", "77080", "77081", "77082", "77083",
+        "77084", "77085", "77086", "77087", "77088", "77089", "77090", "77091", "77092",
+        "77093", "77094", "77095", "77096", "77098", "77099"
+    ];
+
+    const zipInput = document.getElementById('zip');
+    const checkButton = document.getElementById('check-zip-btn');
+    const messageDiv = document.getElementById('zip-message');
+
+    checkButton.addEventListener('click', function() {
+        const userZip = zipInput.value.trim();
+
+        if (userZip === "") {
+            messageDiv.textContent = "";
+            return;
+        }
+
+        if (serviceAreaZips.includes(userZip)) {
+            // --- NUEVA ALERTA DE ÉXITO ---
+            Swal.fire({
+                icon: 'success',
+                title: '¡Excelente!',
+                text: 'Sí tenemos servicio en tu área (' + userZip + '). ¡Contáctanos por WhatsApp para rentar!',
+                confirmButtonText: '¡Genial!',
+                confirmButtonColor: '#ff6b00' // Usamos el color primario de tu marca
+            });
+            // También actualizamos el mensaje en la página (opcional)
+            messageDiv.textContent = "✅ Great! We have service in your area. / ¡Sí tenemos servicio en tu área!";
+            messageDiv.className = "success";
+
+        } else {
+            // --- NUEVA ALERTA DE ERROR ---
+            Swal.fire({
+                icon: 'error',
+                title: 'Lo Sentimos...',
+                text: 'Actualmente no cubrimos el área ' + userZip + '. Llámanos para verificar si podemos hacer una excepción.',
+                confirmButtonText: 'Entendido',
+                confirmButtonColor: '#ff6b00',
+                footer: '<a href="https://wa.me/1XXXXXXXXXX?text=Hola,%20mi%20código%20postal%20es%20' + userZip + '%20y%20quería%20saber%20si%20pueden%20hacer%20una%20excepción." target="_blank" style="color:#007bff; text-decoration:none;">¿Preguntar por una excepción por WhatsApp?</a>'
+            });
+             // También actualizamos el mensaje en la página (opcional)
+            messageDiv.textContent = "❌ Sorry, we don't cover your area yet. / Lo sentimos, aún no cubrimos tu área.";
+            messageDiv.className = "error";
+        }
+    });
