@@ -46,10 +46,18 @@
             <div class="container hero-content">
                 <h1 data-key="hero_title">Roll Off Dumpster Rentals Anywhere in the USA</h1>
                 <p data-key="hero_subtitle">Simple, reliable, and affordable dumpster service for any project, big or small. Get an instant quote and order online in minutes.</p>
-                <div class="zip-form" id="zip-checker-form">
-            <input type="text" id="zip" name="zip" placeholder="Ingresa tu código postal / Enter your ZIP" required>
-            <button type="button" id="check-zip-btn">Verificar / Check</button>
+            <div class="zip-form" id="zip-checker-form">
+                <input type="text" id="zip" name="zip"  placeholder="Ingresa tu código postal / Enter your ZIP" required>
+                <button type="button" id="check-zip-btn">Verificar / Check</button>
+            </div>
+
+    <div id="custom-alert" class="alert-overlay">
+        <div class="alert-box">
+            <h2>Excellent!</h2>
+            <p id="alert-message">Yes, we serve your area. Contact us for more information!</p>
+            <button class="close-btn" id="close-alert-btn" data-key="alert_close_button">Got it</button>
         </div>
+    </div>
                 <a href="https://tally.so/r/wMQN4X" target="_blank" class="btn" data-key="hero_button">Get an Instant Quote</a>
             </div>
         </section>
@@ -190,68 +198,59 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Column 1 -->
-                <div class="footer-col">
-                    <h4 data-key="footer_title_areas">Featured Service Areas</h4>
-                    <ul>
-                        <li><a href="#">Akron, OH</a></li>
-                        <li><a href="#">Atlanta, GA</a></li>
-                        <li><a href="#">Austin, TX</a></li>
-                        <li><a href="#">Chicago, IL</a></li>
-                        <li><a href="#">Denver, CO</a></li>
-                        <li><a href="#">Houston, TX</a></li>
-                        <li><a href="#">Philadelphia, PA</a></li>
-                        <li><a href="#">Phoenix, AZ</a></li>
-                    </ul>
-                </div>
-                <!-- Column 2 -->
-                <div class="footer-col">
-                    <h4 data-key="footer_title_dumpsters">Roll Off Dumpsters</h4>
-                    <ul>
-                        <li><a href="#products">10 Yard</a></li>
-                        <li><a href="#products">15 Yard</a></li>
-                        <li><a href="#products">20 Yard</a></li>
-                        <li><a href="#products">30 Yard</a></li>
-                        <li><a href="#products">40 Yard</a></li>
-                    </ul>
-                </div>
-                <!-- Column 3 -->
-                <div class="footer-col">
-                    <h4 data-key="footer_title_services">Services</h4>
-                    <ul>
-                        <li><a href="#">Contractor Dumpsters</a></li>
-                        <li><a href="#">Construction Dumpsters</a></li>
-                        <li><a href="#">Residential Dumpsters</a></li>
-                        <li><a href="#">Concrete Dumpsters</a></li>
-                        <li><a href="#">Yard Waste Dumpsters</a></li>
-                    </ul>
-                </div>
-                <!-- Column 4 -->
-                 <div class="footer-col">
-                    <h4 data-key="footer_title_support">Support</h4>
-                    <ul>
-                        <li><a href="https://tally.so/r/wMQN4X">Order Online</a></li>
-                        <li><a href="https://tally.so/r/wMQN4X">Request a Project Quote</a></li>
-                        <li><a href="https://tally.so/r/wMQN4X">FAQs</a></li>
-                        <li><a href="https://tally.so/r/wMQN4X">Contact Us</a></li>
-                        <li><a href="https://tally.so/r/wMQN4X">Privacy Policy</a></li>
-                    </ul>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 data-key="footer_title_nationwide">Nuestra Ubicación</h4>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52938394.04350317!2d-161.92225315781042!3d35.91997508297217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sEstados%20Unidos!5e0!3m2!1ses-419!2sdo!4v1755440170555!5m2!1ses-419!2sdo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
-            <div class="footer-bottom">
-                 <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                 </div>
-                 <p>&copy; 2023 Reed Roll Dumpsters llc . All Rights Reserved.</p>
+
+            <div class="footer-col">
+                <h4 data-key="footer_title_dumpsters">Roll Off Dumpsters</h4>
+                <ul>
+                    <li><a href="#products">10 Yard</a></li>
+                    <li><a href="#products">15 Yard</a></li>
+                    <li><a href="#products">20 Yard</a></li>
+                    <li><a href="#products">30 Yard</a></li>
+                    <li><a href="#products">40 Yard</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 data-key="footer_title_services">Services</h4>
+                <ul>
+                    <li><a href="#">Contractor Dumpsters</a></li>
+                    <li><a href="#">Construction Dumpsters</a></li>
+                    <li><a href="#">Residential Dumpsters</a></li>
+                    <li><a href="#">Concrete Dumpsters</a></li>
+                    <li><a href="#">Yard Waste Dumpsters</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 data-key="footer_title_support">Support</h4>
+                <ul>
+                    <li><a href="https://tally.so/r/wMQN4X">Order Online</a></li>
+                    <li><a href="https://tally.so/r/wMQN4X">Request a Project Quote</a></li>
+                    <li><a href="https://tally.so/r/wMQN4X">FAQs</a></li>
+                    <li><a href="https://tally.so/r/wMQN4X">Contact Us</a></li>
+                    <li><a href="https://tally.so/r/wMQN4X">Privacy Policy</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2025 Reed Roll Dumpsters llc . All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
 
 
 <script src="main.js"></script>

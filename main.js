@@ -60,6 +60,12 @@ const translations = {
         footer_title_dumpsters: "Contenedores Roll Off",
         footer_title_services: "Servicios",
         footer_title_support: "Soporte",
+        nav_logo: "Contenedores USA",
+        // ... (todas tus otras traducciones)
+        footer_title_support: "Soporte",
+
+        // --- LÍNEA A AÑADIR ---
+        alert_close_button: "Entendido" 
     }
 };
 
@@ -94,57 +100,61 @@ function updateTexts() {
 }
 
 
-const serviceAreaZips = [
-        "77002", "77003", "77004", "77005", "77006", "77007", "77008", "77009", "77010",
-        "77011", "77012", "77013", "77014", "77015", "77016", "77017", "77018", "77019",
-        "77020", "77021", "77022", "77023", "77024", "77025", "77026", "77027", "77028",
-        "77029", "77030", "77031", "77032", "77033", "77034", "77035", "77036", "77037",
-        "77038", "77039", "77040", "77041", "77042", "77043", "77044", "77045", "77046",
-        "77047", "77048", "77049", "77050", "77051", "77053", "77054", "77055", "77056",
-        "77057", "77058", "77059", "77060", "77061", "77062", "77063", "77064", "77065",
-        "77066", "77067", "77068", "77069", "77070", "77071", "77072", "77073", "77074",
-        "77075", "77076", "77077", "77078", "77079", "77080", "77081", "77082", "77083",
-        "77084", "77085", "77086", "77087", "77088", "77089", "77090", "77091", "77092",
-        "77093", "77094", "77095", "77096", "77098", "77099"
-    ];
+document.addEventListener('DOMContentLoaded', function() {
 
-    const zipInput = document.getElementById('zip');
+    // Obtener los elementos que necesitamos del HTML
     const checkButton = document.getElementById('check-zip-btn');
-    const messageDiv = document.getElementById('zip-message');
+    const zipInput = document.getElementById('zip');
+    const customAlert = document.getElementById('custom-alert');
+    const closeAlertButton = document.getElementById('close-alert-btn');
+    const alertMessage = document.getElementById('alert-message');
 
+    // --- CAMBIO AQUÍ ---
+    // 1. Creamos un objeto con los mensajes en español e inglés.
+    // Usamos funciones para poder insertar el código postal (zipCode) fácilmente.
+    const messages = {
+        es: (zipCode) => `¡Claro que sí! Tenemos la mejor cobertura en el área ${zipCode}. Contáctanos para rentar.`,
+        en: (zipCode) => `Of course! We have the best coverage in the ${zipCode} area. Contact us to rent.`
+    };
+
+    // Función para mostrar la alerta
+    function showAlert(zipCode) {
+        // --- CAMBIO AQUÍ ---
+        // 2. Detectamos el idioma actual de la página.
+        const lang = document.documentElement.lang;
+
+        // 3. Seleccionamos la función del mensaje correcto (con inglés como respaldo).
+        const messageFunction = messages[lang] || messages['en'];
+
+        // 4. Generamos el mensaje final llamando a la función con el zipCode.
+        alertMessage.textContent = messageFunction(zipCode);
+        
+        // El resto de la función se mantiene igual.
+        customAlert.style.display = 'flex';
+        setTimeout(() => customAlert.classList.add('visible'), 10); 
+    }
+
+    // Función para ocultar la alerta (sin cambios)
+    function hideAlert() {
+        customAlert.classList.remove('visible');
+        setTimeout(() => customAlert.style.display = 'none', 300);
+    }
+
+    // El resto de los "oyentes" (event listeners) se mantienen igual.
     checkButton.addEventListener('click', function() {
         const userZip = zipInput.value.trim();
-
-        if (userZip === "") {
-            messageDiv.textContent = "";
-            return;
-        }
-
-        if (serviceAreaZips.includes(userZip)) {
-            // --- NUEVA ALERTA DE ÉXITO ---
-            Swal.fire({
-                icon: 'success',
-                title: '¡Excelente!',
-                text: 'Sí tenemos servicio en tu área (' + userZip + '). ¡Contáctanos por WhatsApp para rentar!',
-                confirmButtonText: '¡Genial!',
-                confirmButtonColor: '#ff6b00' // Usamos el color primario de tu marca
-            });
-            // También actualizamos el mensaje en la página (opcional)
-            messageDiv.textContent = "✅ Great! We have service in your area. / ¡Sí tenemos servicio en tu área!";
-            messageDiv.className = "success";
-
-        } else {
-            // --- NUEVA ALERTA DE ERROR ---
-            Swal.fire({
-                icon: 'error',
-                title: 'Lo Sentimos...',
-                text: 'Actualmente no cubrimos el área ' + userZip + '. Llámanos para verificar si podemos hacer una excepción.',
-                confirmButtonText: 'Entendido',
-                confirmButtonColor: '#ff6b00',
-                footer: '<a href="https://wa.me/1XXXXXXXXXX?text=Hola,%20mi%20código%20postal%20es%20' + userZip + '%20y%20quería%20saber%20si%20pueden%20hacer%20una%20excepción." target="_blank" style="color:#007bff; text-decoration:none;">¿Preguntar por una excepción por WhatsApp?</a>'
-            });
-             // También actualizamos el mensaje en la página (opcional)
-            messageDiv.textContent = "❌ Sorry, we don't cover your area yet. / Lo sentimos, aún no cubrimos tu área.";
-            messageDiv.className = "error";
+        if (userZip !== "") {
+            showAlert(userZip);
         }
     });
+
+    closeAlertButton.addEventListener('click', function() {
+        hideAlert();
+    });
+
+    customAlert.addEventListener('click', function(event) {
+        if (event.target === customAlert) {
+            hideAlert();
+        }
+    });
+});

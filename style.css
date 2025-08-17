@@ -136,7 +136,9 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
         }
-
+        .enter-your-zip{
+            padding-left: 75px;
+        }
         /* --- Services Section --- */
         #services {
             background: var(--light-gray);
@@ -292,112 +294,185 @@
             margin-top: 1rem;
             font-size: 0.9rem;
         }
+        /* Estilos para el contenedor del mapa en el footer */
+.map-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding-top: 75%; /* Proporción 4:3 para el mapa. Ajusta si es necesario */
+    border-radius: 10px;
+}
+
+.map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; /* Asegura que no haya borde */
+}
         
         /* Mobile Menu Toggle */
         .nav-toggle { display: none; }
         
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.8rem; }
-            .section-title { font-size: 2.2rem; }
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: var(--light-gray);
-                flex-direction: column;
-                justify-content: center;
-                gap: 2.5rem;
-                transition: left 0.5s ease;
-            }
-            .nav-menu.active {
-                left: 0;
-            }
-            .nav-toggle {
-                display: block;
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
+        /* ==========================================================================
+   5. Diseño Responsivo (Media Queries)
+   ========================================================================== */
+
+/* --- Tablet y Menú Móvil (768px y menos) --- */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--light-gray);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        transition: left 0.5s ease;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .zip-form {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+/* --- Teléfonos Pequeños (480px y menos) --- */
+@media (max-width: 480px) {
+    body {
+        line-height: 1.7;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .btn {
+        padding: 14px 28px;
+        font-size: 1rem;
+        width: 100%; /* Botones de ancho completo para fácil click */
+        text-align: center;
+    }
+
+    .zip-form {
+        padding: 1rem;
+    }
+    
+    .product-content, .service-item, .testimonial-card {
+        padding: 1.5rem;
+    }
+}
+        
+ 
+
+
+
+
+
+
+        .zip-form {
+        display: flex;
+        gap: 10px;
+        padding: 1.5rem;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom:10px ;
         }
-  /* Contenedor principal del formulario y resultados */
-        .checker-container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        .zip-form input {
+            font-size: 16px;
+            padding: 10px  70px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .zip-form button {
+            font-size: 16px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            
+        }
+        .zip-form button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* --- ESTILOS PARA LA ALERTA PERSONALIZADA (¡NUEVO!) --- */
+        
+        /* El fondo oscuro que cubre la pantalla */
+        .alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 450px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none; /* Oculto por defecto */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
 
-        h2 {
+        /* La caja de la alerta */
+        .alert-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            /* Animación para aparecer suavemente */
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Estilo para cuando la alerta está visible */
+        .alert-overlay.visible .alert-box {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .alert-box h2 {
             margin-top: 0;
+            color: var(--primary-color); /* Un color verde de éxito */
+            font-size: 24px;
+        }
+
+        .alert-box p {
+            font-size: 18px;
             color: #333;
         }
         
-        /* Estilo para el formulario */
-        .zip-form {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        /* Estilo para el campo de texto (input) */
-        #zip {
-            flex-grow: 1; /* Ocupa el espacio disponible */
-            padding: 12px 15px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        #zip:focus {
-            outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
-        }
-
-        /* Estilo para el botón */
-        #check-zip-btn {
-            padding: 12px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #check-zip-btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Estilo para el contenedor del resultado */
-        #zip-result {
+        .alert-box .close-btn {
             margin-top: 20px;
-            padding: 12px;
+            padding: 10px 25px;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
             border-radius: 8px;
-            font-weight: bold;
-            display: none; /* Oculto por defecto */
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
-        
-        /* Clase para mensaje de éxito */
-        .success {
-            display: block; /* Hacer visible */
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        /* Clase para mensaje de error */
-        .error {
-            display: block; /* Hacer visible */
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+
+        .alert-box .close-btn:hover {
+            background-color:var(--primary-color);
         }
